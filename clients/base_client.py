@@ -12,20 +12,17 @@ class BaseClient:
 
         headers = {}
         if target:
-            headers["Authorization"] = target
+            headers["Authorization"] = "Bearer " + target
 
         if content_type:
             headers["Content-Type"] = content_type
         return headers
 
-    def post(self, url, payload, headers=None):
-        return self.session.post(self.base_url + url, data=payload, headers=headers)
+    def post(self, url, payload, files=None, headers=None):
+        return self.session.post(self.base_url + url, data=payload, files=files, headers=headers)
 
-    def post_form(self, url, payload, headers=None, files=None):
-        return self.session.post(self.base_url + url, payload=payload, files=files, headers=headers)
-
-    def patch(self, url, payload, headers):
-        return self.session.patch(self.base_url + url, data=payload, headers=headers)
+    def patch(self, url, payload, files=None, headers=None):
+        return self.session.patch(self.base_url + url, data=payload, files=files, headers=headers)
 
     def delete(self, url, headers):
         return self.session.delete(self.base_url + url, headers=headers)

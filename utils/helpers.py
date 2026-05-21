@@ -1,3 +1,4 @@
+import os
 import random
 import string
 
@@ -22,3 +23,8 @@ def generate_new_user_data():
         "password": password
     }
     return payload
+
+
+def get_upload_file_path(filename):
+    current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    return os.path.join(current_dir, "tests", "resources", filename)
