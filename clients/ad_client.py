@@ -6,13 +6,8 @@ from endpoints import Endpoint
 
 class AdClient(BaseClient):
     def create_ad(self, payload, files=None, token=None):
-        if files:
-            headers = self._get_headers(token, content_type=None)
-            return self.post(Endpoint.CREATE_AD, payload, files, headers)
-        else:
-            m = MultipartEncoder(fields=payload)
-            headers = self._get_headers(token, content_type=m.content_type)
-            return self.post(Endpoint.CREATE_AD, payload=m, headers=headers)
+        headers = self._get_headers(token, content_type=None)
+        return self.post(Endpoint.CREATE_AD, payload, files, headers)
 
     def delete_ad(self, ad_id, token=None):
         headers = self._get_headers(token)

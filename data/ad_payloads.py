@@ -21,23 +21,28 @@ class AdCondition(StrEnum):
     USED = "Б/У"
 
 
-def create_ad_payload(name="Бампер",
+class TestImages(StrEnum):
+    FLOWER = "flower.jpeg"
+    BEE = "bee.png"
+
+
+def create_ad_payload(name=None,
                       category=AdCategory.AUTO,
                       condition=AdCondition.NEW,
-                      city="Казань",
-                      description="Хороший",
-                      price="1600"):
+                      price=None,
+                      city=None,
+                      description=None):
     return {
-        "name": name,
-        "price": price,
+        "name": name or fake.catch_phrase(),
         "category": category,
         "condition": condition,
-        "description": description,
-        "city": city
+        "price": price or str(fake.random_int(min=100, max=560)),
+        "city": city or fake.city(),
+        "description": description or fake.text(max_nb_chars=20),
     }
 
 
-def prepare_ad_with_image(payload: dict, image_name="bee.png"):
+def prepare_ad_with_image(payload: dict, image_name=TestImages.BEE):
     file_path = helpers.get_upload_file_path(image_name)
     return open(file_path, "rb")
 

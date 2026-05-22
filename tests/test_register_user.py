@@ -1,4 +1,4 @@
-from data import HTTPStatusCode, ExpectedMessage
+from data import ExpectedMessage, HTTPStatusCode
 from utils import helpers
 
 
