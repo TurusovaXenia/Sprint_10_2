@@ -14,10 +14,10 @@ class AdClient(BaseClient):
         return self.delete(Endpoint.DELETE_AD + f'/{ad_id}', headers=headers)
 
     def update_ad(self, ad_id, payload, files=None, token=None):
+        fields = dict(payload)
         if files:
-            headers = self._get_headers(token, content_type=None)
-            return self.patch(Endpoint.UPDATE_AD + f'/{ad_id}', payload, files, headers)
-        else:
-            m = MultipartEncoder(fields=payload)
-            headers = self._get_headers(token, content_type=m.content_type)
-            return self.patch(Endpoint.UPDATE_AD + f'/{ad_id}', payload=m, headers=headers)
+            for name, file_obj in files.items():
+                fields[name] = (file_obj.name, file_obj)
+        m = MultipartEncoder(fields=fields)
+        headers = self._get_headers(token, content_type=m.content_type)
+        return self.patch(Endpoint.UPDATE_AD + f'/{ad_id}', payload=m, headers=headers)

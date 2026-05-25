@@ -21,7 +21,7 @@ class AdCondition(StrEnum):
     USED = "Б/У"
 
 
-class TestImages(StrEnum):
+class AdImage(StrEnum):
     FLOWER = "flower.jpeg"
     BEE = "bee.png"
 
@@ -42,7 +42,7 @@ def create_ad_payload(name=None,
     }
 
 
-def prepare_ad_with_image(image_name=TestImages.BEE):
+def prepare_ad_with_image(image_name=AdImage.BEE):
     file_path = helpers.get_upload_file_path(image_name)
     return open(file_path, "rb")
 
