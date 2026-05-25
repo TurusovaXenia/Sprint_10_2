@@ -10,7 +10,7 @@ class TestCreateAd:
     def test_create_ad_success(self, authorized_ad_client, category, ad_cleanup):
         payload = ad_payloads.create_ad_payload(category=category)
 
-        with ad_payloads.prepare_ad_with_image(payload) as image_file:
+        with ad_payloads.prepare_ad_with_image() as image_file:
             response = authorized_ad_client.create_ad(payload, files={"images": image_file})
 
         assert response.status_code == HTTPStatusCode.CREATED

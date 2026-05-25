@@ -19,7 +19,7 @@ class TestUpdateAd:
     def test_update_ad_with_image_success(self, authorized_ad_client, created_ad_id):
         payload = ad_payloads.create_ad_payload()
 
-        with ad_payloads.prepare_ad_with_image(payload, TestImages.FLOWER) as image_file:
+        with ad_payloads.prepare_ad_with_image(TestImages.FLOWER) as image_file:
             response = authorized_ad_client.update_ad(created_ad_id, payload, files={"images": image_file})
 
         assert response.status_code == HTTPStatusCode.OK

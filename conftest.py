@@ -64,7 +64,7 @@ def ad_cleanup(authorized_ad_client):
 def created_ad_id(authorized_ad_client):
     payload = ad_payloads.create_ad_payload()
 
-    with ad_payloads.prepare_ad_with_image(payload) as image_file:
+    with ad_payloads.prepare_ad_with_image() as image_file:
         response = authorized_ad_client.create_ad(payload, files={"images": image_file})
     res_json = response.json()
     ad_id = res_json.get("id")
