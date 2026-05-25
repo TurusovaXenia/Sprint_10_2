@@ -57,10 +57,7 @@ def ad_cleanup(authorized_ad_client):
 
     ad_id = data.get("ad_id")
     if ad_id:
-        try:
-            authorized_ad_client.delete_ad(ad_id)
-        except Exception as e:
-            print(f"\n[Cleanup Error] Не удалось удалить объявление {ad_id}: {e}")
+        authorized_ad_client.delete_ad(ad_id)
 
 
 @pytest.fixture(scope="function")
@@ -75,7 +72,4 @@ def created_ad_id(authorized_ad_client):
     yield ad_id
 
     if ad_id:
-        try:
-            authorized_ad_client.delete_ad(ad_id)
-        except Exception as e:
-            print(f"\n[Cleanup Error] Не удалось удалить объявление {ad_id}: {e}")
+        authorized_ad_client.delete_ad(ad_id)
