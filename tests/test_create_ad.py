@@ -1,6 +1,7 @@
 import pytest
 
 from data import ad_payloads, AdCategory, HTTPStatusCode
+from utils import helpers
 
 
 class TestCreateAd:
@@ -15,7 +16,7 @@ class TestCreateAd:
         assert response.status_code == HTTPStatusCode.CREATED
 
         res_json = response.json()
-        cleaned_res = ({key: str(res_json[key]) for key in payload if key in res_json})
+        cleaned_res = helpers.get_cleaned_response(res_json, payload)
 
         ad_cleanup["ad_id"] = res_json.get("id")
         assert cleaned_res == payload

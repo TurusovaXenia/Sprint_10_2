@@ -10,4 +10,5 @@ class TestAuthorizeUser:
         res_json = response.json()
 
         assert (res_json.get("user", {}).get("email") == user_setup["email"])
-        assert res_json.get("token", {}).get("access_token"), "Токен не пришел или структура ответа изменилась"
+        assert res_json.get("token", {}).get("access_token"), \
+            "Токен не пришел или структура ответа изменилась"

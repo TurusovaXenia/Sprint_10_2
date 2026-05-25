@@ -28,3 +28,11 @@ def generate_new_user_data():
 def get_upload_file_path(filename):
     current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     return os.path.join(current_dir, "tests", "resources", filename)
+
+
+def get_cleaned_response(res_json, payload):
+    return {
+        key: str(res_json[key])
+        for key in payload
+        if key in res_json
+    }

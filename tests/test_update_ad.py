@@ -12,7 +12,7 @@ class TestUpdateAd:
         assert response.status_code == HTTPStatusCode.OK
 
         res_json = response.json()
-        cleaned_res = ({key: str(res_json[key]) for key in patch_payload if key in res_json})
+        cleaned_res = helpers.get_cleaned_response(res_json, patch_payload)
 
         assert cleaned_res == patch_payload
 
