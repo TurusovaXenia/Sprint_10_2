@@ -73,3 +73,12 @@ def created_ad_id(authorized_ad_client):
 
     if ad_id:
         authorized_ad_client.delete_ad(ad_id)
+
+
+@pytest.fixture(scope="function")
+def auth_context(authorized_ad_client):
+    author_token = authorized_ad_client.access_token
+
+    yield author_token
+
+    authorized_ad_client.set_access_token(author_token)
